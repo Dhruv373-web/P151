@@ -1,0 +1,57 @@
+AFRAME.registerComponent("move-car", {
+  schema: {
+    moveX: { type: "number", default: 1 },
+  },
+
+  tick: function () {
+
+    this.data.moveX = this.data.moveX + 0.01;
+
+    var pos = this.el.getAttribute("position");
+
+    pos.x = this.data.moveX;
+
+    this.el.setAttribute("position", {x: pos.x, y: pos.y, z: pos.z});
+  }
+});
+
+AFRAME.registerComponent('log', {
+    schema: {
+      message: {type: 'string', default: 'Hello, World!'}
+    },
+    init: function () {
+        console.log(this.data.message);
+      }
+  });
+  <!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  
+  <script src="Log.js"></script>
+  <script src="Car.js"></script>
+  </head>
+
+<body>
+
+  <a-scene background="color:#000000">
+
+    <a-camera position="0 0 5">
+
+    </a-camera>
+  <a-entity log="Hi, it's me!"></a-entity>
+
+    <a-entity position="0 0 0" rotation="0 0 0" move-box>
+
+      <a-box>
+
+      </a-box>
+
+    </a-entity>
+
+  </a-scene>
+
+</body>
+
+</html>
